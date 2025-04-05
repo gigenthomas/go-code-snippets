@@ -1,0 +1,3 @@
+# conf.yaml
+port: 8080
+name: my-service
