@@ -64,15 +64,14 @@ Listening on http://localhost:8080
 
 ## ⚙️ Configuration with Viper
 
-Create a `config.yaml` in the root or `/conf/` directory:
+Create a `config.yaml` in the root  directory:
 
 ```yaml
-server:
-  port: ":8080"
 
-log:
-  level: "info"
-  encoding: "json"
+  port: ":8080"
+  name : "my-app"
+
+
 ```
 
 Viper will auto-detect and load the config file and support environment variable overrides.
