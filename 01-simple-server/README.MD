@@ -10,6 +10,7 @@ Simple server that prints Hello World !!
     ```
 4. Run the server:
     ```bash
+    go mod tidy 
     go run main.go
     ```
 5. Open your browser and go to `http://localhost:8080` to see the "Hello World !!" message.
