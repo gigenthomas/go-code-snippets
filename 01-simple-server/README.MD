@@ -6,7 +6,7 @@ Simple server that prints Hello World !!
 2. Clone this repository to your local machine.
 3. Navigate to the project directory:
     ```bash
-    cd /c:/Users/gigen/go/go-code-snippets/01-simple-server
+    cd go-code-snippets/01-simple-server
     ```
 4. Run the server:
     ```bash
