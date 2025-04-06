@@ -1,54 +1,51 @@
 package main
 
 import (
-	"context"
 	"fmt"
 	"net/http"
 	"os"
 	"os/signal"
 	"strconv"
 	"syscall"
-	"time"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
+	"go.uber.org/zap"
+	"go.uber.org/zap/zapcore"
 
 	"server-http/config"
 )
 
-type Server interface {
-	Start() error
-	Stop() error
-}
+var logger *zap.Logger
 
-type HTTPServer struct {
-	server *http.Server
-}
-
-func NewHTTPServer(addr string, handler http.Handler) *HTTPServer {
-	return &HTTPServer{
-		server: &http.Server{
-			Addr:    addr,
-			Handler: handler,
+func initLogger() error {
+	config := zap.Config{
+		Level:            zap.NewAtomicLevelAt(zap.InfoLevel),
+		Development:      false,
+		Encoding:         "json",
+		OutputPaths:      []string{"stdout", "server.log"},
+		ErrorOutputPaths: []string{"stderr"},
+		EncoderConfig: zapcore.EncoderConfig{
+			TimeKey:        "time",
+			LevelKey:       "level",
+			NameKey:        "logger",
+			CallerKey:      "caller",
+			MessageKey:     "msg",
+			StacktraceKey:  "stacktrace",
+			LineEnding:     zapcore.DefaultLineEnding,
+			EncodeLevel:    zapcore.CapitalLevelEncoder,
+			EncodeTime:     zapcore.ISO8601TimeEncoder,
+			EncodeDuration: zapcore.StringDurationEncoder,
+			EncodeCaller:   zapcore.ShortCallerEncoder,
 		},
 	}
-}
-
-func (h *HTTPServer) Start() error {
-	fmt.Println("Starting server on", h.server.Addr)
-	go func() {
-		if err := h.server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
-			fmt.Println("Server error:", err)
-		}
-	}()
+	var err error
+	logger, err = config.Build()
+	if err != nil {
+		return err
+	}
+	zap.ReplaceGlobals(logger)
 	return nil
-}
-
-func (h *HTTPServer) Stop() error {
-	fmt.Println("Stopping server...")
-	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
-	defer cancel()
-	return h.server.Shutdown(ctx)
 }
 
 func main() {
