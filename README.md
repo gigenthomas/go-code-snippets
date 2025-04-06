@@ -12,7 +12,7 @@ https://github.com/avelino/awesome-go
     - Implementation of API using the chi framework 
 
 ### 2. **Configuration**
-    - Config managemetn using Viper 
+    - Config managemetn  using Viper 
 
 ### 3. **Logging**
     - Demonstrations of Uber's zap framework .
@@ -26,7 +26,7 @@ https://github.com/avelino/awesome-go
 ### 6. **Context **
     - Use of Go's context API
 
-### 7. **Testing**
-    - Unit testing and benchmarking examples to ensure code quality.
+### 7. **Final Template**
+    - Use this as a starter projects for all of the microservices 
 
 Feel free to explore the snippets and use them as a reference for your Go projects!
