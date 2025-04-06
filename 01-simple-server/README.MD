@@ -2,7 +2,10 @@
 Simple server that prints Hello World !!
 ## How to Run
 
-1. Ensure you have Go installed on your system. You can download it from [golang.org](https://golang.org/).
+1. Ensure you have Go installed on your system. 
+    ```bash
+    go version 
+    ```
 2. Clone this repository to your local machine.
 3. Navigate to the project directory:
     ```bash
